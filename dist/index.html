@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="container">
+      <header>
+        <input type="text" id="locationInput" autocomplete="off" />
+        <button id="searchBtn">Search</button>
+      </header>
+      <main>
+        <div><button id="C-btn" class="selected">°C</button><button id="F-btn">°F</button></div>
+        <div>
+          <span id="time">5:49am, Apr 13</span>
+          <h2 id="location"></h2>
+          <div>
+            <img id="weather-icon" alt="Weather Icon" />
+            <span id="temp"></span>
+          </div>
+          <span id="weather-desc"></span>
+        </div>
+      </main>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
