@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+eval("async function fetchWeatherData(location) {\n  try {\n    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=179bae8745da1a9cdaae471cc6487a0f`;\n    const response = await fetch(url);\n    const weatherData = await response.json();\n    return weatherData;\n  } catch (error) {\n    throw new Error('Error occured');\n  }\n}\n\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
 
 /***/ })
 
