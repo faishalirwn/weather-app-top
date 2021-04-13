@@ -6,6 +6,7 @@ const state = {
   currentIconUrl: '',
   currentTemp: '',
   currentFeelsLike: '',
+  currentCountry: '',
 };
 
 const inputEl = document.querySelector('#locationInput');
@@ -25,7 +26,7 @@ const fBtn = document.querySelector('#F-btn');
 function filterWeatherData(weatherData) {
   const entriesArr = Object.entries(weatherData);
   const filteredEntriesArr = entriesArr.filter(([key]) => {
-    if (key === 'weather' || key === 'main' || key === 'name') {
+    if (key === 'weather' || key === 'main' || key === 'name' || key === 'sys') {
       return true;
     }
     return false;
@@ -57,11 +58,12 @@ function updateCurrentState(weatherData) {
   state.currentIconUrl = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`;
   state.currentTemp = Math.round(weatherData.main.temp);
   state.currentFeelsLike = Math.round(weatherData.main.feels_like);
+  state.currentCountry = weatherData.sys.country;
 }
 
 function renderData() {
   timeEl.textContent = state.currentTime;
-  locationEl.textContent = state.currentName;
+  locationEl.textContent = `${state.currentName}, ${state.currentCountry}`;
   weatherIconEl.setAttribute('src', state.currentIconUrl);
 
   let unitText;
