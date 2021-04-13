@@ -1,5 +1,5 @@
 const state = {
-  selectedLocation: 'bandung',
+  selectedLocation: 'Hell',
   selectedUnit: 'metric',
   currentName: '',
   currentDesc: '',
@@ -9,12 +9,11 @@ const state = {
   currentCountry: '',
 };
 
-const inputEl = document.querySelector('#locationInput');
-const searchBtn = document.querySelector('#searchBtn');
+const inputEl = document.querySelector('#location-input');
+const searchBtn = document.querySelector('#search-btn');
 
 const mainEl = document.querySelector('main');
 
-const timeEl = document.querySelector('#time');
 const locationEl = document.querySelector('#location');
 const weatherIconEl = document.querySelector('#weather-icon');
 const tempEl = document.querySelector('#temp');
@@ -22,6 +21,8 @@ const weatherDescEl = document.querySelector('#weather-desc');
 
 const cBtn = document.querySelector('#C-btn');
 const fBtn = document.querySelector('#F-btn');
+
+const loadingOverlay = document.querySelector('#loading-overlay');
 
 function filterWeatherData(weatherData) {
   const entriesArr = Object.entries(weatherData);
@@ -62,7 +63,6 @@ function updateCurrentState(weatherData) {
 }
 
 function renderData() {
-  timeEl.textContent = state.currentTime;
   locationEl.textContent = `${state.currentName}, ${state.currentCountry}`;
   weatherIconEl.setAttribute('src', state.currentIconUrl);
 
@@ -78,29 +78,35 @@ function renderData() {
 }
 
 searchBtn.addEventListener('click', async () => {
+  loadingOverlay.style.display = 'flex';
   state.selectedLocation = inputEl.value;
   const weatherData = await getWeatherData(state.selectedLocation, state.selectedUnit);
   if (state.selectedLocation === '' || Object.entries(weatherData).length === 0) {
     mainEl.classList.add('display-none');
+    loadingOverlay.style.display = 'none';
     return;
   }
 
   mainEl.classList.remove('display-none');
   updateCurrentState(weatherData);
+  loadingOverlay.style.display = 'none';
   renderData();
 });
 
 inputEl.addEventListener('keydown', async (e) => {
   if (e.key === 'Enter') {
+    loadingOverlay.style.display = 'flex';
     state.selectedLocation = inputEl.value;
     const weatherData = await getWeatherData(state.selectedLocation, state.selectedUnit);
     if (state.selectedLocation === '' || Object.entries(weatherData).length === 0) {
       mainEl.classList.add('display-none');
+      loadingOverlay.style.display = 'none';
       return;
     }
 
     mainEl.classList.remove('display-none');
     updateCurrentState(weatherData);
+    loadingOverlay.style.display = 'none';
     renderData();
   }
 });
