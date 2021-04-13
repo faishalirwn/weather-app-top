@@ -10,22 +10,28 @@
   </head>
   <body>
     <div id="container">
+      <h1>Weathering with You</h1>
       <header>
-        <input type="text" id="locationInput" autocomplete="off" />
-        <button id="searchBtn">Search</button>
+        <input type="text" id="location-input" autocomplete="off" placeholder="Search city" />
+        <button id="search-btn">Search</button>
+        <div id="unit-switch">
+          <button id="C-btn" class="selected">°C</button><button id="F-btn">°F</button>
+        </div>
       </header>
       <main>
-        <div><button id="C-btn" class="selected">°C</button><button id="F-btn">°F</button></div>
+        <h2 id="location"></h2>
         <div>
-          <span id="time">5:49am, Apr 13</span>
-          <h2 id="location"></h2>
-          <div>
-            <img id="weather-icon" alt="Weather Icon" />
-            <span id="temp"></span>
-          </div>
-          <span id="weather-desc"></span>
+          <img id="weather-icon" alt="Weather Icon" />
+          <span id="temp"></span>
         </div>
+        <span id="weather-desc"></span>
       </main>
+    </div>
+    <div id="loading-overlay">
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
     </div>
     <script src="main.js"></script>
   </body>
